@@ -1,0 +1,139 @@
+
+===========================================================================
+report_checks -unconstrained
+===========================================================================
+======================= Typical Corner ===================================
+
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _0928_ (recovery check against rising-edge clock clk)
+Path Group: asynchronous
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock network delay (propagated)
+                          2.00    2.00 ^ input external delay
+                  0.02    0.01    2.01 ^ rst_n (in)
+     1    0.00                           rst_n (net)
+                  0.02    0.00    2.01 ^ input10/A (sky130_fd_sc_hd__clkbuf_2)
+                  0.13    0.17    2.18 ^ input10/X (sky130_fd_sc_hd__clkbuf_2)
+     1    0.02                           net10 (net)
+                  0.13    0.00    2.18 ^ fanout28/A (sky130_fd_sc_hd__buf_4)
+                  0.18    0.25    2.43 ^ fanout28/X (sky130_fd_sc_hd__buf_4)
+    10    0.06                           net28 (net)
+                  0.18    0.00    2.44 ^ fanout26/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.16    0.28    2.72 ^ fanout26/X (sky130_fd_sc_hd__clkbuf_4)
+    10    0.05                           net26 (net)
+                  0.16    0.00    2.72 ^ _0928_/RESET_B (sky130_fd_sc_hd__dfrtp_4)
+                                  2.72   data arrival time
+
+                         10.00   10.00   clock clk (rise edge)
+                          0.00   10.00   clock source latency
+                  0.14    0.09   10.09 ^ clk (in)
+     1    0.03                           clk (net)
+                  0.14    0.00   10.09 ^ clkbuf_0_clk/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.13    0.22   10.31 ^ clkbuf_0_clk/X (sky130_fd_sc_hd__clkbuf_16)
+    16    0.11                           clknet_0_clk (net)
+                  0.13    0.00   10.31 ^ clkbuf_4_13_0_clk/A (sky130_fd_sc_hd__clkbuf_8)
+                  0.06    0.16   10.47 ^ clkbuf_4_13_0_clk/X (sky130_fd_sc_hd__clkbuf_8)
+     9    0.03                           clknet_4_13_0_clk (net)
+                  0.06    0.00   10.47 ^ _0928_/CLK (sky130_fd_sc_hd__dfrtp_4)
+                         -0.25   10.22   clock uncertainty
+                          0.00   10.22   clock reconvergence pessimism
+                          0.19   10.41   library recovery time
+                                 10.41   data required time
+-----------------------------------------------------------------------------
+                                 10.41   data required time
+                                 -2.72   data arrival time
+-----------------------------------------------------------------------------
+                                  7.69   slack (MET)
+
+
+Startpoint: _0935_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: empty (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout     Cap    Slew   Delay    Time   Description
+-----------------------------------------------------------------------------
+                          0.00    0.00   clock clk (rise edge)
+                          0.00    0.00   clock source latency
+                  0.14    0.10    0.10 ^ clk (in)
+     1    0.03                           clk (net)
+                  0.14    0.00    0.10 ^ clkbuf_0_clk/A (sky130_fd_sc_hd__clkbuf_16)
+                  0.13    0.24    0.34 ^ clkbuf_0_clk/X (sky130_fd_sc_hd__clkbuf_16)
+    16    0.11                           clknet_0_clk (net)
+                  0.13    0.00    0.34 ^ clkbuf_4_13_0_clk/A (sky130_fd_sc_hd__clkbuf_8)
+                  0.06    0.18    0.52 ^ clkbuf_4_13_0_clk/X (sky130_fd_sc_hd__clkbuf_8)
+     9    0.03                           clknet_4_13_0_clk (net)
+                  0.06    0.00    0.52 ^ _0935_/CLK (sky130_fd_sc_hd__dfrtp_4)
+                  0.09    0.54    1.07 v _0935_/Q (sky130_fd_sc_hd__dfrtp_4)
+     7    0.03                           count[1] (net)
+                  0.09    0.00    1.07 v _0457_/B (sky130_fd_sc_hd__or4_2)
+                  0.15    0.76    1.83 v _0457_/X (sky130_fd_sc_hd__or4_2)
+     4    0.02                           _0149_ (net)
+                  0.15    0.00    1.83 v _0458_/B (sky130_fd_sc_hd__nor2_1)
+                  0.29    0.30    2.13 ^ _0458_/Y (sky130_fd_sc_hd__nor2_1)
+     1    0.02                           net22 (net)
+                  0.29    0.00    2.13 ^ output22/A (sky130_fd_sc_hd__clkbuf_4)
+                  0.11    0.28    2.41 ^ output22/X (sky130_fd_sc_hd__clkbuf_4)
+     1    0.03                           empty (net)
+                  0.11    0.00    2.41 ^ empty (out)
+                                  2.41   data arrival time
+
+                         10.00   10.00   clock clk (rise edge)
+                          0.00   10.00   clock network delay (propagated)
+                         -0.25    9.75   clock uncertainty
+                          0.00    9.75   clock reconvergence pessimism
+                         -2.00    7.75   output external delay
+                                  7.75   data required time
+-----------------------------------------------------------------------------
+                                  7.75   data required time
+                                 -2.41   data arrival time
+-----------------------------------------------------------------------------
+                                  5.34   slack (MET)
+
+
+
+
+===========================================================================
+report_checks --slack_max -0.01
+============================================================================
+======================= Typical Corner ===================================
+
+No paths found.
+
+
+===========================================================================
+ report_check_types -max_slew -max_cap -max_fanout -violators
+============================================================================
+======================= Typical Corner ===================================
+
+max fanout
+
+Pin                                   Limit Fanout  Slack
+---------------------------------------------------------
+clkbuf_0_clk/X                           10     16     -6 (VIOLATED)
+clkbuf_4_11_0_clk/X                      10     13     -3 (VIOLATED)
+clkbuf_4_1_0_clk/X                       10     13     -3 (VIOLATED)
+clkbuf_4_2_0_clk/X                       10     13     -3 (VIOLATED)
+clkbuf_4_10_0_clk/X                      10     12     -2 (VIOLATED)
+
+
+
+===========================================================================
+report_parasitic_annotation -report_unannotated
+============================================================================
+Found 0 unannotated drivers.
+Found 0 partially unannotated drivers.
+
+===========================================================================
+max slew violation count 0
+max fanout violation count 5
+max cap violation count 0
+============================================================================
+
+===========================================================================
+check_setup -verbose -unconstrained_endpoints -multiple_clock -no_clock -no_input_delay -loops -generated_clocks
+===========================================================================
